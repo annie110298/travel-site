@@ -44,12 +44,12 @@
 
         <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
         
-        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="processPhoneNumber(event)">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="prepareFormSubmission(event)">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
 
-            <input type="hidden" name="subject" value="Nowe Zgłoszenie: [name] - [tour] - [date]">
+            <input type="hidden" id="email_subject" name="subject" value="Nowe Zgłoszenie">
 
             <label for="name">Imię i Nazwisko:</label>
             <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
@@ -97,9 +97,16 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
 
-        function processPhoneNumber(e) {
+        // SKRYPT INTEGRUJĄCY DANE DO TEMATU WIADOMOŚCI
+        function prepareFormSubmission(e) {
             const fullNumber = phoneInput.getNumber();
             document.querySelector("#full_phone").value = fullNumber;
+
+            const customerName = document.querySelector("#name").value;
+            const chosenTour = document.querySelector("#tour").value;
+            const preferredDate = document.querySelector("#date").value;
+
+            document.querySelector("#email_subject").value = `Nowe Zgłoszenie: ${customerName} - ${chosenTour} - ${preferredDate}`;
         }
     </script>
 </body>
