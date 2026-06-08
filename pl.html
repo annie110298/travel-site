@@ -70,4 +70,40 @@
     </div>
 
 </body>
+</html>            <h3>Górska Przygoda</h3>
+            <p>Całodniowa wycieczka w góry z profesjonalnym przewodnikiem i zapewnionym transportem. Cena: 120$ za osobę.</p>
+        </div>
+
+        <hr>
+
+        <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
+        
+        <form action="https://api.web3forms.com/submit" method="POST">
+            
+            <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
+
+            <label for="name">Imię i Nazwisko:</label>
+            <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
+
+            <label for="email">Adres E-mail:</label>
+            <input type="email" id="email" name="email" required placeholder="jan@przyklad.pl">
+
+            <label for="tour">Wybierz Wycieczkę:</label>
+            <select id="tour" name="tour">
+                <option value="City Sightseeing (PL)">Zwiedzanie Miasta + Transfer</option>
+                <option value="Mountain Adventure (PL)">Górska Przygoda</option>
+                <option value="Custom Transport (PL)">Indywidualne zamówienie transportu</option>
+            </select>
+
+            <label for="date">Preferowana Data:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="message">Dodatkowe Informacje / Wiadomość:</label>
+            <textarea id="message" name="message" rows="4" placeholder="Ile osób? Czy masz specjalne życzenia?"></textarea>
+
+            <button type="submit">Wyślij Zgłoszenie</button>
+        </form>
+    </div>
+
+</body>
 </html>
