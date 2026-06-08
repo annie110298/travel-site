@@ -44,7 +44,7 @@
 
         <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
         
-        <form id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="prepareForm(this)">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
@@ -83,7 +83,7 @@
             <label for="message">Dodatkowe Informacje / Wiadomość:</label>
             <textarea id="message" name="message" rows="4" placeholder="Czy są jakieś specjalne życzenia lub wymagania dotyczące bagażu?"></textarea>
 
-            <button type="button" onclick="validateAndSubmit()">Wyślij Zgłoszenie</button>
+            <button type="submit">Wyślij Zgłoszenie</button>
         </form>
     </div>
 
@@ -96,24 +96,15 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
 
-        function validateAndSubmit() {
-            const form = document.querySelector("#bookingForm");
-            
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return; 
-            }
-
+        function prepareForm(form) {
             const fullNumber = phoneInput.getNumber();
-            document.querySelector("#full_phone").value = fullNumber;
+            form.querySelector("#full_phone").value = fullNumber;
 
-            const customerName = document.querySelector("#name").value;
-            const chosenTour = document.querySelector("#tour").value;
-            const preferredDate = document.querySelector("#date").value;
+            const customerName = form.querySelector("#name").value;
+            const chosenTour = form.querySelector("#tour").value;
+            const preferredDate = form.querySelector("#date").value;
 
-            document.querySelector("#email_subject").value = `Nowe Zgłoszenie: ${customerName} - ${chosenTour} - ${preferredDate}`;
-
-            form.submit();
+            form.querySelector("#email_subject").value = `Nowe Zgłoszenie: ${customerName} - ${chosenTour} - ${preferredDate}`;
         }
     </script>
 </body>
