@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wycieczki i Transport</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intl-tel-input.css">
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
         header { background: #35424a; color: #ffffff; padding: 20px; text-align: center; position: relative; }
@@ -18,7 +17,10 @@
         button { margin-top: 20px; padding: 10px; background: #35424a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background: #e8491d; }
         
-        .iti { width: 100%; margin-top: 5px; }
+        /* Układ wyświetlający listę kierunkową i numer obok siebie */
+        .phone-container { display: flex; gap: 10px; margin-top: 5px; }
+        .phone-container select { width: 35%; margin-top: 0; }
+        .phone-container input { width: 65%; margin-top: 0; }
     </style>
 </head>
 <body>
@@ -45,11 +47,9 @@
 
         <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
         
-        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="processPhoneNumber(event)">
+        <form action="https://api.web3forms.com/submit" method="POST">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
-            
-            <input type="hidden" id="full_phone" name="full_phone">
 
             <label for="name">Imię i Nazwisko:</label>
             <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
@@ -57,8 +57,32 @@
             <label for="email">Adres E-mail:</label>
             <input type="email" id="email" name="email" required placeholder="jan@przyklad.pl">
 
-            <label for="phone">Numer Kontaktowy:</label>
-            <input type="tel" id="phone" required placeholder="123 456 789">
+            <label>Numer Kontaktowy:</label>
+            <div class="phone-container">
+                <select name="country_code" required>
+                    <option value="+48" selected>🇵🇱 Polska (+48)</option>
+                    <option value="+44">🇬🇧 Wielka Brytania (+44)</option>
+                    <option value="+1">🇺🇸 USA (+1)</option>
+                    <option value="+49">🇩🇪 Niemcy (+49)</option>
+                    <option value="+33">🇫🇷 Francja (+33)</option>
+                    <option value="+39">🇮🇹 Włochy (+39)</option>
+                    <option value="+34">🇪🇸 Hiszpania (+34)</option>
+                    <option value="+31">🇳🇱 Holandia (+31)</option>
+                    <option value="+32">🇧🇪 Belgia (+32)</option>
+                    <option value="+41">🇨🇭 Szwajcaria (+41)</option>
+                    <option value="+43">🇦🇹 Austria (+43)</option>
+                    <option value="+353">🇮🇪 Irlandia (+353)</option>
+                    <option value="+420">🇨🇿 Czechy (+420)</option>
+                    <option value="+380">🇺🇦 Ukraina (+380)</option>
+                    <option value="+45">🇩🇰 Dania (+45)</option>
+                    <option value="+46">🇸🇪 Szwecja (+46)</option>
+                    <option value="+47">🇳🇴 Norwegia (+47)</option>
+                    <option value="+61">🇦🇺 Australia (+61)</option>
+                    <option value="+64">🇳🇿 Nowa Zelandia (+64)</option>
+                    <option value="Inny">Inny (Wpisz w szczegółach)</option>
+                </select>
+                <input type="tel" id="phone" name="phone_number" required placeholder="123 456 789">
+            </div>
 
             <label for="tour">Wybierz Wycieczkę:</label>
             <select id="tour" name="tour">
@@ -77,19 +101,5 @@
         </form>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intl-tel-input.min.js"></script>
-    <script>
-        const phoneInputField = document.querySelector("#phone");
-        const phoneInput = window.intlTelInput(phoneInputField, {
-            initialCountry: "pl",
-            preferredCountries: ["pl", "gb", "us", "de"],
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-        });
-
-        function processPhoneNumber(e) {
-            const fullNumber = phoneInput.getNumber();
-            document.querySelector("#full_phone").value = fullNumber;
-        }
-    </script>
 </body>
 </html>
