@@ -44,12 +44,12 @@
 
         <h2>Book Your Tour / Request a Quote</h2>
         
-        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="processPhoneNumber(event)">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="prepareFormSubmission(event)">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
 
-            <input type="hidden" name="subject" value="Booking Request: [name] - [tour] - [date]">
+            <input type="hidden" id="email_subject" name="subject" value="New Booking Request">
 
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -97,9 +97,19 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
 
-        function processPhoneNumber(e) {
+        // JAVASCRIPT FIXED WORKFLOW
+        function prepareFormSubmission(e) {
+            // 1. Process phone number structure
             const fullNumber = phoneInput.getNumber();
             document.querySelector("#full_phone").value = fullNumber;
+
+            // 2. Safely capture actual input values
+            const customerName = document.querySelector("#name").value;
+            const chosenTour = document.querySelector("#tour").value;
+            const preferredDate = document.querySelector("#date").value;
+
+            // 3. String together the structural subject line variables directly
+            document.querySelector("#email_subject").value = `Booking Request: ${customerName} - ${chosenTour} - ${preferredDate}`;
         }
     </script>
 </body>
