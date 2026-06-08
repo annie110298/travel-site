@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Transport Tours</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        header { background: #35424a; color: #ffffff; padding: 20px; text-align: center; position: relative; }
+        .lang-switch { position: absolute; top: 20px; right: 20px; }
+        .lang-switch a { color: #fff; text-decoration: none; font-weight: bold; background: #e8491d; padding: 5px 10px; border-radius: 3px; }
+        .container { max-width: 800px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0px 0px 10px #ccc; }
+        .tour-box { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; background: #fafafa; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 10px; font-weight: bold; }
+        input, select, textarea { padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 20px; padding: 10px; background: #35424a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #e8491d; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Global Transport & Travel Tours</h1>
+        <div class="lang-switch">
+            <a href="pl.html">Po Polsku 🇵🇱</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Our Popular Tours</h2>
+        <div class="tour-box">
+            <h3>City Sightseeing Transfer</h3>
+            <p>Comfortable transport around the city's best landmarks. Price: $50 per person.</p>
+        </div>
+        <div class="tour-box">
+            <h3>Mountain Adventure Tour</h3>
+            <p>Full-day trip to the mountains with a professional guide and transport included. Price: $120 per person.</p>
+        </div>
+
+        <hr>
+
+        <h2>Book Your Tour / Request a Quote</h2>
+        
+        <!-- Web3Forms handles this form directly -->
+        <form action="https://api.web3forms.com/submit" method="POST">
+            
+            <!-- Your Web3Forms Access Key -->
+            <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
+            
+            <!-- Redirects back to your site after they submit -->
+            <input type="hidden" name="redirect" value="https://shiny-douhua-4b7d08.netlify.app/">
+
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe">
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com">
+
+            <label for="tour">Choose a Tour:</label>
+            <select id="tour" name="tour">
+                <option value="City Sightseeing">City Sightseeing Transfer</option>
+                <option value="Mountain Adventure">Mountain Adventure Tour</option>
+                <option value="Custom Transport">Custom Transport Request</option>
+            </select>
+
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="message">Additional Details / Message:</label>
+            <textarea id="message" name="message" rows="4" placeholder="How many people? Any special requests?"></textarea>
+
+            <button type="submit">Submit Booking Request</button>
+        </form>
+    </div>
+
+</body>
+</html>
