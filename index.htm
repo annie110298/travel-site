@@ -41,7 +41,16 @@
         <hr>
 
         <h2>Book Your Tour / Request a Quote</h2>
-        <form name="english-bookings" method="POST" data-netlify="true">
+        
+        <!-- Web3Forms handles this form directly -->
+        <form action="https://api.web3forms.com/submit" method="POST">
+            
+            <!-- Your Web3Forms Access Key -->
+            <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
+            
+            <!-- Redirects back to your site after they submit -->
+            <input type="hidden" name="redirect" value="https://shiny-douhua-4b7d08.netlify.app/">
+
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required placeholder="John Doe">
 
@@ -50,9 +59,9 @@
 
             <label for="tour">Choose a Tour:</label>
             <select id="tour" name="tour">
-                <option value="city-tour">City Sightseeing Transfer</option>
-                <option value="mountain-tour">Mountain Adventure Tour</option>
-                <option value="custom-transport">Custom Transport Request</option>
+                <option value="City Sightseeing">City Sightseeing Transfer</option>
+                <option value="Mountain Adventure">Mountain Adventure Tour</option>
+                <option value="Custom Transport">Custom Transport Request</option>
             </select>
 
             <label for="date">Preferred Date:</label>
