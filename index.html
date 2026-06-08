@@ -44,7 +44,7 @@
 
         <h2>Book Your Tour / Request a Quote</h2>
         
-        <form id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="prepareForm(this)">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
@@ -83,7 +83,7 @@
             <label for="message">Additional Details / Message:</label>
             <textarea id="message" name="message" rows="4" placeholder="Any special requests or luggage requirements?"></textarea>
 
-            <button type="button" onclick="validateAndSubmit()">Submit Booking Request</button>
+            <button type="submit">Submit Booking Request</button>
         </form>
     </div>
 
@@ -96,29 +96,18 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
 
-        function validateAndSubmit() {
-            const form = document.querySelector("#bookingForm");
-            
-            // Forces HTML5 validation check (Checks if Name, Email, Phone, etc. are filled out)
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return; 
-            }
-
+        function prepareForm(form) {
             // Process Phone Data
             const fullNumber = phoneInput.getNumber();
-            document.querySelector("#full_phone").value = fullNumber;
+            form.querySelector("#full_phone").value = fullNumber;
 
-            // Gather inputs dynamically
-            const customerName = document.querySelector("#name").value;
-            const chosenTour = document.querySelector("#tour").value;
-            const preferredDate = document.querySelector("#date").value;
+            // Gather inputs dynamically from this specific form submission
+            const customerName = form.querySelector("#name").value;
+            const chosenTour = form.querySelector("#tour").value;
+            const preferredDate = form.querySelector("#date").value;
 
-            // Inject structural subject line safely before submission execution
-            document.querySelector("#email_subject").value = `Booking Request: ${customerName} - ${chosenTour} - ${preferredDate}`;
-
-            // Send form
-            form.submit();
+            // Update the subject right before it maps to Web3Forms
+            form.querySelector("#email_subject").value = `Booking Request: ${customerName} - ${chosenTour} - ${preferredDate}`;
         }
     </script>
 </body>
