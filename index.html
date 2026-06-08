@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel & Transport Tours</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intl-tel-input.css">
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
         header { background: #35424a; color: #ffffff; padding: 20px; text-align: center; position: relative; }
@@ -16,6 +17,8 @@
         input, select, textarea { padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
         button { margin-top: 20px; padding: 10px; background: #35424a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background: #e8491d; }
+        /* Fixes the plugin layout to look nice on your form */
+        .iti { width: 100%; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -52,6 +55,9 @@
             <label for="email">Your Email:</label>
             <input type="email" id="email" name="email" required placeholder="john@example.com">
 
+            <label for="phone">Contact Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
             <label for="tour">Choose a Tour:</label>
             <select id="tour" name="tour">
                 <option value="City Sightseeing">City Sightseeing Transfer</option>
@@ -69,5 +75,13 @@
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intl-tel-input.min.js"></script>
+    <script>
+        const input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            initialCountry: "pl", // Defaults to Poland flag, change to "gb" or "us" if preferred
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js",
+        });
+    </script>
 </body>
 </html>
