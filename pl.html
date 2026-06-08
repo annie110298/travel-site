@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wycieczki i Transport</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intl-tel-input.css">
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
         header { background: #35424a; color: #ffffff; padding: 20px; text-align: center; position: relative; }
@@ -16,6 +17,8 @@
         input, select, textarea { padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
         button { margin-top: 20px; padding: 10px; background: #35424a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background: #e8491d; }
+        /* Fixes the plugin layout to look nice on your form */
+        .iti { width: 100%; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -52,41 +55,8 @@
             <label for="email">Adres E-mail:</label>
             <input type="email" id="email" name="email" required placeholder="jan@przyklad.pl">
 
-            <label for="tour">Wybierz Wycieczkę:</label>
-            <select id="tour" name="tour">
-                <option value="City Sightseeing (PL)">Zwiedzanie Miasta + Transfer</option>
-                <option value="Mountain Adventure (PL)">Górska Przygoda</option>
-                <option value="Custom Transport (PL)">Indywidualne zamówienie transportu</option>
-            </select>
-
-            <label for="date">Preferowana Data:</label>
-            <input type="date" id="date" name="date" required>
-
-            <label for="message">Dodatkowe Informacje / Wiadomość:</label>
-            <textarea id="message" name="message" rows="4" placeholder="Ile osób? Czy masz specjalne życzenia?"></textarea>
-
-            <button type="submit">Wyślij Zgłoszenie</button>
-        </form>
-    </div>
-
-</body>
-</html>            <h3>Górska Przygoda</h3>
-            <p>Całodniowa wycieczka w góry z profesjonalnym przewodnikiem i zapewnionym transportem. Cena: 120$ za osobę.</p>
-        </div>
-
-        <hr>
-
-        <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
-        
-        <form action="https://api.web3forms.com/submit" method="POST">
-            
-            <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
-
-            <label for="name">Imię i Nazwisko:</label>
-            <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
-
-            <label for="email">Adres E-mail:</label>
-            <input type="email" id="email" name="email" required placeholder="jan@przyklad.pl">
+            <label for="phone">Numer Kontaktowy:</label>
+            <input type="tel" id="phone" name="phone" required>
 
             <label for="tour">Wybierz Wycieczkę:</label>
             <select id="tour" name="tour">
@@ -105,5 +75,13 @@
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intl-tel-input.min.js"></script>
+    <script>
+        const input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            initialCountry: "pl", // Ustawia flagę Polski jako domyślną
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js",
+        });
+    </script>
 </body>
 </html>
