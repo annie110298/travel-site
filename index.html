@@ -44,12 +44,11 @@
 
         <h2>Book Your Tour / Request a Quote</h2>
         
-        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="prepareFormSubmission(event)">
+        <form id="bookingForm" action="https://api.web3forms.com/submit" method="POST">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
-
-            <input type="hidden" id="email_subject" name="subject" value="New Booking Request">
+            <input type="hidden" id="email_subject" name="subject" value="Booking Request">
 
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -84,7 +83,7 @@
             <label for="message">Additional Details / Message:</label>
             <textarea id="message" name="message" rows="4" placeholder="Any special requests or luggage requirements?"></textarea>
 
-            <button type="submit">Submit Booking Request</button>
+            <button type="button" onclick="validateAndSubmit()">Submit Booking Request</button>
         </form>
     </div>
 
@@ -97,19 +96,29 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
 
-        // JAVASCRIPT FIXED WORKFLOW
-        function prepareFormSubmission(e) {
-            // 1. Process phone number structure
+        function validateAndSubmit() {
+            const form = document.querySelector("#bookingForm");
+            
+            // Forces HTML5 validation check (Checks if Name, Email, Phone, etc. are filled out)
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return; 
+            }
+
+            // Process Phone Data
             const fullNumber = phoneInput.getNumber();
             document.querySelector("#full_phone").value = fullNumber;
 
-            // 2. Safely capture actual input values
+            // Gather inputs dynamically
             const customerName = document.querySelector("#name").value;
             const chosenTour = document.querySelector("#tour").value;
             const preferredDate = document.querySelector("#date").value;
 
-            // 3. String together the structural subject line variables directly
+            // Inject structural subject line safely before submission execution
             document.querySelector("#email_subject").value = `Booking Request: ${customerName} - ${chosenTour} - ${preferredDate}`;
+
+            // Send form
+            form.submit();
         }
     </script>
 </body>
