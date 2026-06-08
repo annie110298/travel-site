@@ -49,10 +49,8 @@
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
 
-            <input type="hidden" name="subject" value="Booking Request: %name% - %tour% - %date%">
-
             <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required placeholder="John Doe">
+            <input type="text" id="name" name="Name" required placeholder="John Doe">
 
             <label for="email">Your Email:</label>
             <input type="email" id="email" name="email" required placeholder="john@example.com">
@@ -61,10 +59,11 @@
             <input type="tel" id="phone" required placeholder="123 456 789">
 
             <label for="tour">Choose a Tour:</label>
-            <select id="tour" name="tour">
-                <option value="City Sightseeing">City Sightseeing Transfer</option>
-                <option value="Mountain Adventure">Mountain Adventure Tour</option>
-                <option value="Custom Transport">Custom Transport Request</option>
+            <select id="tour" name="subject" required>
+                <option value="" disabled selected>Select a Tour</option>
+                <option value="Booking Request: City Sightseeing">City Sightseeing Transfer</option>
+                <option value="Booking Request: Mountain Adventure">Mountain Adventure Tour</option>
+                <option value="Booking Request: Custom Transport">Custom Transport Request</option>
             </select>
 
             <label for="guests">Number of People:</label>
@@ -79,7 +78,7 @@
             </select>
 
             <label for="date">Preferred Date:</label>
-            <input type="date" id="date" name="date" required>
+            <input type="date" id="date" name="preferred_date" required>
 
             <label for="message">Additional Details / Message:</label>
             <textarea id="message" name="message" rows="4" placeholder="Any special requests or luggage requirements?"></textarea>
