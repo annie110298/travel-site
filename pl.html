@@ -48,9 +48,11 @@
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
+            
+            <input type="hidden" id="email_subject" name="subject" value="Nowe Zgłoszenie">
 
             <label for="name">Imię i Nazwisko:</label>
-            <input type="text" id="name" name="Name" required placeholder="Jan Kowalski">
+            <input type="text" id="name" name="name" required placeholder="Jan Kowalski" oninput="updateSubjectLine()">
 
             <label for="email">Adres E-mail:</label>
             <input type="email" id="email" name="email" required placeholder="jan@przyklad.pl">
@@ -59,11 +61,10 @@
             <input type="tel" id="phone" required placeholder="123 456 789">
 
             <label for="tour">Wybierz Wycieczkę:</label>
-            <select id="tour" name="subject" required>
-                <option value="" disabled selected>Wybierz wycieczkę</option>
-                <option value="Nowe Zgłoszenie: Zwiedzanie Miasta">Zwiedzanie Miasta + Transfer</option>
-                <option value="Nowe Zgłoszenie: Górska Przygoda">Górska Przygoda</option>
-                <option value="Nowe Zgłoszenie: Indywidualny Transport">Indywidualne zamówienie transportu</option>
+            <select id="tour" name="tour" onchange="updateSubjectLine()">
+                <option value="City Sightseeing">Zwiedzanie Miasta + Transfer</option>
+                <option value="Mountain Adventure" selected>Górska Przygoda</option>
+                <option value="Custom Transport">Indywidualne zamówienie transportu</option>
             </select>
 
             <label for="guests">Liczba osób:</label>
@@ -78,7 +79,7 @@
             </select>
 
             <label for="date">Preferowana Data:</label>
-            <input type="date" id="date" name="preferred_date" required>
+            <input type="date" id="date" name="date" required onchange="updateSubjectLine()">
 
             <label for="message">Dodatkowe Informacje / Wiadomość:</label>
             <textarea id="message" name="message" rows="4" placeholder="Czy są jakieś specjalne życzenia lub wymagania dotyczące bagażu?"></textarea>
@@ -95,6 +96,15 @@
             preferredCountries: ["pl", "gb", "us", "de"],
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
+
+        // Aktualizuje ukryty temat wiadomości na żywo podczas wpisywania danych
+        function updateSubjectLine() {
+            const customerName = document.getElementById("name").value || "Nowy Klient";
+            const chosenTour = document.getElementById("tour").value;
+            const preferredDate = document.getElementById("date").value || "Brak Daty";
+            
+            document.getElementById("email_subject").value = `Nowe Zgłoszenie: ${customerName} - ${chosenTour} - ${preferredDate}`;
+        }
 
         function processPhoneNumber(e) {
             const fullNumber = phoneInput.getNumber();
