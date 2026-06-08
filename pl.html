@@ -17,7 +17,6 @@
         input, select, textarea { padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; width: 100%; }
         button { margin-top: 20px; padding: 10px; background: #35424a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background: #e8491d; }
-        
         .iti { width: 100%; margin-top: 5px; }
     </style>
 </head>
@@ -48,7 +47,6 @@
         <form action="https://api.web3forms.com/submit" method="POST" onsubmit="processPhoneNumber(event)">
             
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
-            
             <input type="hidden" id="full_phone" name="full_phone">
 
             <label for="name">Imię i Nazwisko:</label>
@@ -67,11 +65,25 @@
                 <option value="Custom Transport (PL)">Indywidualne zamówienie transportu</option>
             </select>
 
+            <label for="guests">Liczba osób:</label>
+            <select id="guests" name="number_of_people" required>
+                <option value="" disabled selected>Wybierz liczbę uczestników</option>
+                <option value="1 osoba">1 osoba</option>
+                <option value="2 osoby">2 osoby</option>
+                <option value="3 osoby">3 osoby</option>
+                <option value="4 osoby">4 osoby</option>
+                <option value="5 osób">5 osób</option>
+                <option value="6 osób">6 osób</option>
+                <option value="7 osób">7 osób</option>
+                <option value="8 osób">8 osób</option>
+                <option value="9+ osób">Duża grupa (9+ osób)</option>
+            </select>
+
             <label for="date">Preferowana Data:</label>
             <input type="date" id="date" name="date" required>
 
             <label for="message">Dodatkowe Informacje / Wiadomość:</label>
-            <textarea id="message" name="message" rows="4" placeholder="Ile osób? Czy masz specjalne życzenia?"></textarea>
+            <textarea id="message" name="message" rows="4" placeholder="Czy są jakieś specjalne życzenia lub wymagania dotyczące bagażu?"></textarea>
 
             <button type="submit">Wyślij Zgłoszenie</button>
         </form>
