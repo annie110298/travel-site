@@ -49,10 +49,8 @@
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
             <input type="hidden" id="full_phone" name="full_phone">
 
-            <input type="hidden" name="subject" value="Nowe Zgłoszenie: %name% - %tour% - %date%">
-
             <label for="name">Imię i Nazwisko:</label>
-            <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
+            <input type="text" id="name" name="Name" required placeholder="Jan Kowalski">
 
             <label for="email">Adres E-mail:</label>
             <input type="email" id="email" name="email" required placeholder="jan@przyklad.pl">
@@ -61,10 +59,11 @@
             <input type="tel" id="phone" required placeholder="123 456 789">
 
             <label for="tour">Wybierz Wycieczkę:</label>
-            <select id="tour" name="tour">
-                <option value="City Sightseeing (PL)">Zwiedzanie Miasta + Transfer</option>
-                <option value="Mountain Adventure (PL)">Górska Przygoda</option>
-                <option value="Custom Transport (PL)">Indywidualne zamówienie transportu</option>
+            <select id="tour" name="subject" required>
+                <option value="" disabled selected>Wybierz wycieczkę</option>
+                <option value="Nowe Zgłoszenie: Zwiedzanie Miasta">Zwiedzanie Miasta + Transfer</option>
+                <option value="Nowe Zgłoszenie: Górska Przygoda">Górska Przygoda</option>
+                <option value="Nowe Zgłoszenie: Indywidualny Transport">Indywidualne zamówienie transportu</option>
             </select>
 
             <label for="guests">Liczba osób:</label>
@@ -79,7 +78,7 @@
             </select>
 
             <label for="date">Preferowana Data:</label>
-            <input type="date" id="date" name="date" required>
+            <input type="date" id="date" name="preferred_date" required>
 
             <label for="message">Dodatkowe Informacje / Wiadomość:</label>
             <textarea id="message" name="message" rows="4" placeholder="Czy są jakieś specjalne życzenia lub wymagania dotyczące bagażu?"></textarea>
