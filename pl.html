@@ -18,7 +18,6 @@
         button { margin-top: 20px; padding: 10px; background: #35424a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background: #e8491d; }
         .iti { width: 100%; margin-top: 5px; }
-        #form-result { margin-top: 15px; font-weight: bold; text-align: center; padding: 10px; border-radius: 4px; display: none; }
     </style>
 </head>
 <body>
@@ -45,8 +44,12 @@
 
         <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
         
-        <form id="bookingForm" method="POST">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="processPhoneNumber(event)">
+            
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
+            <input type="hidden" id="full_phone" name="full_phone">
+
+            <input type="hidden" name="subject" value="Nowe Zgłoszenie: %name% - %tour% - %date%">
 
             <label for="name">Imię i Nazwisko:</label>
             <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
@@ -82,7 +85,6 @@
             <textarea id="message" name="message" rows="4" placeholder="Czy są jakieś specjalne życzenia lub wymagania dotyczące bagażu?"></textarea>
 
             <button type="submit">Wyślij Zgłoszenie</button>
-            <div id="form-result"></div>
         </form>
     </div>
 
@@ -95,50 +97,10 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
 
-        const form = document.getElementById('bookingForm');
-        const resultMsg = document.getElementById('form-result');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-
-            const formData = new FormData(form);
-
-            const customerName = document.getElementById('name').value;
-            const chosenTour = document.getElementById('tour').value;
-            const preferredDate = document.getElementById('date').value;
+        function processPhoneNumber(e) {
             const fullNumber = phoneInput.getNumber();
-
-            formData.append('subject', `Nowe Zgłoszenie: ${customerName} - ${chosenTour} - ${preferredDate}`);
-            formData.append('full_phone', fullNumber);
-
-            resultMsg.style.display = "block";
-            resultMsg.style.backgroundColor = "#eaf2f8";
-            resultMsg.style.color = "#2980b9";
-            resultMsg.innerHTML = "Przetwarzanie zgłoszenia, proszę czekać...";
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            })
-            .then(async (response) => {
-                let res = await response.json();
-                if (response.status == 200) {
-                    resultMsg.style.backgroundColor = "#d4edda";
-                    resultMsg.style.color = "#155724";
-                    resultMsg.innerHTML = "Dziękujemy! Twoje zgłoszenie zostało pomyślnie wysłane.";
-                    form.reset();
-                } else {
-                    resultMsg.style.backgroundColor = "#f8d7da";
-                    resultMsg.style.color = "#721c24";
-                    resultMsg.innerHTML = res.message || "Coś poszło nie tak. Spróbuj ponownie.";
-                }
-            })
-            .catch(error => {
-                resultMsg.style.backgroundColor = "#f8d7da";
-                resultMsg.style.color = "#721c24";
-                resultMsg.innerHTML = "Błąd sieci. Sprawdź swoje połączenie internetowe.";
-            });
-        });
+            document.querySelector("#full_phone").value = fullNumber;
+        }
     </script>
 </body>
 </html>
