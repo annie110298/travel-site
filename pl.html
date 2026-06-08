@@ -42,14 +42,9 @@
 
         <h2>Zarezerwuj Wycieczkę / Zapytaj o Wycenę</h2>
         
-        <!-- Formularz obsługiwany przez Web3Forms -->
         <form action="https://api.web3forms.com/submit" method="POST">
             
-            <!-- Twój klucz Web3Forms -->
             <input type="hidden" name="access_key" value="2cafc133-c1f0-4cbe-9d15-31d01fc0c9df">
-            
-            <!-- Przekierowanie z powrotem na stronę po wysłaniu -->
-            <input type="hidden" name="redirect" value="https://shiny-douhua-4b7d08.netlify.app/pl.html">
 
             <label for="name">Imię i Nazwisko:</label>
             <input type="text" id="name" name="name" required placeholder="Jan Kowalski">
